@@ -1,0 +1,66 @@
+8BYTE.AI ASSESMENT BABY
+
+Assignment Overview
+The assignment is divided into four key parts:
+Part 1: Infrastructure Provisioning: Use Terraform to provision a VPC, RDS (PostgreSQL), and application hosting (EC2/ECS/EKS) on AWS.
+Part 2: Deployment Automation: Create CI/CD pipelines (GitHub Actions/GitLab/Jenkins) including test suites, Docker image handling, and staging/production deployment logic.
+Part 3: Monitoring & Logging: Set up centralized logging and infrastructure/application metrics with at least two dashboards.
+Part 4: Documentation: Provide a README explaining setup, architectural decisions, and security considerations.
+
+Email was sent to me @ 3:51 PM on 31st August 2026
+need to be done @ 3:00 PM on 3rd September 2026
+
+STEP 1: setting up the environment (started at 31/8/26 10pm TO 12pm) 2 Hrs
+
+  1:github repository  -----DONE-----
+   -updated git 
+   -create repository
+   -clone repository
+   -Branch Setup
+  2:AWS account within "free tier". 100$ for 6 months  -----DONE-----
+
+   -setup console account credentials with mailsagarsharma33@gmail.com
+   -JUST DISABLE AUTOPAY ONCE IMM DONE HERE AND CLOSE INSTANCES WHEN I STOP WORKING
+   -I also setup a budget alert for cost per month if > 15$ , when the budget reacher 67% of the month an alert is sent
+ 
+  3:Setup terraform locally -----DONE-----
+
+   -install amd64 zip 
+   -setup environment variables : $PATH SET TO DIRECTORY NOT .exe  W:\wAPPLICATIONS\Terraform 1.16.0
+   
+  4:setting up the local project
+
+   - Get a hello world type project template for node js and docker containerisation 
+   - how and what to connect with postgresql ------ ????????  
+
+ 
+
+STEP 2 part 1: infra provisioning 
+
+  1: terraform file structure and code
+   - VPC, RDS (PostgreSQL), and application hosting (EC2/ECS/EKS) on AWS
+  2: state management
+   - s3 with dynamodb statelocking
+
+STEP 3 part 2:Deployment Automation:
+  1:Create CI/CD pipelines (GitHub Actions/GitLab/Jenkins) 
+   -including test suites, 
+   -Docker image handling, 
+   -staging/production deployment logic.
+
+STEP 4 part 3:Monitoring & logging
+  1:Setup cloudwatch
+   - Infrastructure metrics (CPU, memory, disk)
+   - Application metrics (request rate, error rate, latency)
+
+
+
+
+
+
+
+
+
+
+
+
