@@ -1,0 +1,4 @@
+mistakes and challenges
+1> was pushing all of .terraform file into git so it failed to push.
+   fix - included .terraform into .gitingore
+2>    
