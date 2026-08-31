@@ -17,28 +17,33 @@ STEP 1: setting up the environment (started at 31/8/26 10pm TO 12pm) 2 Hrs
    -create repository
    -clone repository
    -Branch Setup
+
   2:AWS account within "free tier". 100$ for 6 months  -----DONE-----
 
    -setup console account credentials with mailsagarsharma33@gmail.com
    -JUST DISABLE AUTOPAY ONCE IMM DONE HERE AND CLOSE INSTANCES WHEN I STOP WORKING
    -I also setup a budget alert for cost per month if > 15$ , when the budget reacher 67% of the month an alert is sent
- 
+   
   3:Setup terraform locally -----DONE-----
 
    -install amd64 zip 
    -setup environment variables : $PATH SET TO DIRECTORY NOT .exe  W:\wAPPLICATIONS\Terraform 1.16.0
    
-  4:setting up the local project
+  4:setting up the local project -----skipping-----
 
    - Get a hello world type project template for node js and docker containerisation 
    - how and what to connect with postgresql ------ ????????  
-
  
 
-STEP 2 part 1: infra provisioning 
+STEP 2 part 1: infra provisioning (started at 1/9/26 1pm)
+  1: terraform file structure and code - VPC, RDS (PostgreSQL), and application hosting (EC2) on AWS
+   - create IAM user for terraform 
+   - create programmatic authentication keys
+   - make main.tf file
+   - configure aws cli with credentials
+   - terraform init (aws version v6.62.0 on local)
+   - terraform plan 
 
-  1: terraform file structure and code
-   - VPC, RDS (PostgreSQL), and application hosting (EC2/ECS/EKS) on AWS
   2: state management
    - s3 with dynamodb statelocking
 
