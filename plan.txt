@@ -30,12 +30,16 @@ STEP 1: setting up the environment (started at 31/8/26 10pm TO 12pm) 2 Hrs
    -setup environment variables : $PATH SET TO DIRECTORY NOT .exe  W:\wAPPLICATIONS\Terraform 1.16.0
    
   4:setting up the local project -----skipping-----
-    #            dnf update -y
-    #            dnf install -y docker
-    #            systemctl enable docker
-    #            systemctl start docker
-    #            usermod -aG docker ec2-user
-    #            dns installl -y amazon-cloudwatch-agent
+    -using ec2-user but good habit is to make another user and manage permissions
+
+    -Creating ec2 application environment
+                dnf update -y
+                dnf install -y docker
+                systemctl enable docker
+                systemctl start docker
+                usermod -aG docker ec2-user                         ---done---
+                sudo dnf install -y git                             ---done---
+                git clone 8byte-Assessment-
 
    - Get a hello world type project template for node js and docker containerisation 
    - how and what to connect with postgresql ------ ????????  
