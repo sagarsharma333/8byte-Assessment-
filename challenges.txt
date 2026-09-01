@@ -1,4 +1,17 @@
 mistakes and challenges
 1> was pushing all of .terraform file into git so it failed to push.
    fix - included .terraform into .gitingore
-2>    
+
+2> rds name couldnt use a number in the beginning "8"
+   fix - changed project name to "eight" 
+
+3> didnt create ec2 becuase i left in the auto fill for a wrong ami name 
+   fixed - removed the -gp2 from the name
+
+4> free tier eligibilty issues
+   ec2 - t2.micro is not free but t3.micro is free 
+   rds -  7 days backup retention no good 1 day good
+   fixed
+
+5> used a "cidr_block" instead of "security_groups"
+   fixed

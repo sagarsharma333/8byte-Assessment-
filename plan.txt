@@ -23,19 +23,26 @@ STEP 1: setting up the environment (started at 31/8/26 10pm TO 12pm) 2 Hrs
    -setup console account credentials with mailsagarsharma33@gmail.com
    -JUST DISABLE AUTOPAY ONCE IMM DONE HERE AND CLOSE INSTANCES WHEN I STOP WORKING
    -I also setup a budget alert for cost per month if > 15$ , when the budget reacher 67% of the month an alert is sent
-   
+
   3:Setup terraform locally -----DONE-----
 
    -install amd64 zip 
    -setup environment variables : $PATH SET TO DIRECTORY NOT .exe  W:\wAPPLICATIONS\Terraform 1.16.0
    
   4:setting up the local project -----skipping-----
+    #            dnf update -y
+    #            dnf install -y docker
+    #            systemctl enable docker
+    #            systemctl start docker
+    #            usermod -aG docker ec2-user
+    #            dns installl -y amazon-cloudwatch-agent
 
    - Get a hello world type project template for node js and docker containerisation 
    - how and what to connect with postgresql ------ ????????  
  
 
-STEP 2 part 1: infra provisioning (started at 1/9/26 1pm)
+STEP 2 part 1: infra provisioning (started at 1/9/26 1am stopped at 4am) 3hrs
+
   1: terraform file structure and code - VPC, RDS (PostgreSQL), and application hosting (EC2) on AWS
    - create IAM user for terraform 
    - create programmatic authentication keys
@@ -44,8 +51,26 @@ STEP 2 part 1: infra provisioning (started at 1/9/26 1pm)
    - terraform init (aws version v6.62.0 on local)
    - terraform plan 
 
-  2: state management
-   - s3 with dynamodb statelocking
+   ----------------------------------------.tf files-----------------------------------------------
+   backend.tf file created to manage statelocking in s3 bucket 
+   vpc.tf file created with 2 public and 2 private subnets for ec2 , alb and rds requirements
+   main.tf changes to providers.tf 
+   variables.tf for handling all variables in my main 
+   vpc.tf vpc configuration
+   rds.tf rds configuration
+   security_groups.tf security groups configuration for alb, app, and rds
+   alb.tf Load balancer configuration
+   .tfvars handling password injection during tf.apply from here with ip stuff
+   outputs.tf just to see some variables
+
+   ec2.tf ec2 configuration file
+
+
+
+
+  2: state management ----------DONE------------
+   - created s3 bucket for state locking
+   - wrote backend.tf with the bucket details
 
 STEP 3 part 2:Deployment Automation:
   1:Create CI/CD pipelines (GitHub Actions/GitLab/Jenkins) 
