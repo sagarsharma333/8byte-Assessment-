@@ -51,7 +51,7 @@ def index():
     return f"""
     <html>
       <head>
-        <title>8Byte DevOps Assignment</title>
+        <title>8Byte DevOps Assignment DEVELOPMENT</title>
         <style>
           body {{ font-family: sans-serif; background: #0f172a; color: #e2e8f0;
                   display: flex; align-items: center; justify-content: center;
