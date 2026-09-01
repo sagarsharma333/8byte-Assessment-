@@ -1,1 +1,4 @@
 iac_terra/.terraform/
+iac_terra/terraform.tfvars
+iac_terra/terraform.tfstate
+iac_terra/.terraform.lock.hcl

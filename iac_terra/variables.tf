@@ -40,15 +40,21 @@ variable "availability_zones" {
     ]
 }
 
-#variable "my_ip" {
-#    description = "my ip address for ssh access"  
-#    type = string
-   # default = "106.51.221.196/32"
-#}
+# handling variable injection here
+variable "my_ip" {
+    description = "my ip address for ssh access"  
+    type = string
+    #default = "106.51.221.196/32"
+}
 
-#variable "key_name" {
-#    description = "ec2 key pair  for ssh access"
-#    type = string
-#}
+variable "key_name" {
+    description = "ec2 key pair  for ssh access"
+    type = string
+}
 
+variable "db_password" {
+    description = "rds password"
+    type = string
+    sensitive = true
+}
 
