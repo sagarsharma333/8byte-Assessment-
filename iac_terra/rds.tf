@@ -8,7 +8,7 @@ resource "aws_db_subnet_group" "main" {
   
 }
 resource "aws_db_instance" "main" {
-    identifier = "${var.project_name}-rds"
+    identifier = "${var.project_name}-rds-instance"
     allocated_storage = 20
     engine = "postgres"
     engine_version = "16"
@@ -24,6 +24,6 @@ resource "aws_db_instance" "main" {
     multi_az = false
     publicly_accessible = false
 
-    backup_retention_period = 7 #this is a simple backup retention for disaster management 
+    backup_retention_period = 1 #this is a simple backup retention for disaster management increase this value for real use cases #free tier
     skip_final_snapshot = true  #delete the snapshot when the db is deleted keeping it freeeeeeee    
 }

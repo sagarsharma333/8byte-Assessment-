@@ -5,7 +5,7 @@ variable "aws_region" {
 
 variable "project_name" {
     type = string
-    default = "8byte-devops"
+    default = "eightbyte-devops"
 }
 
 variable "vpc_cidr" {
