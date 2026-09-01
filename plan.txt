@@ -41,8 +41,8 @@ STEP 1: setting up the environment (started at 31/8/26 10pm TO 12pm) 2 Hrs
                 sudo dnf install -y git                             ---done---
                 git clone 8byte-Assessment-
 
-   - Get a hello world type project template for node js and docker containerisation 
-   - how and what to connect with postgresql ------ ????????  
+   - simple python project that will show visited count
+   - we store visited site count in postgresql
  
 
 STEP 2 part 1: infra provisioning (started at 1/9/26 1am stopped at 4am) 3hrs

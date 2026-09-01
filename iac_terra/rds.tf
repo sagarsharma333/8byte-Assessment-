@@ -22,7 +22,7 @@ resource "aws_db_instance" "main" {
     vpc_security_group_ids = [aws_security_group.rds.id]
 
     multi_az = false
-    publicly_accessible = false
+    publicly_accessible = true
 
     backup_retention_period = 1 #this is a simple backup retention for disaster management increase this value for real use cases #free tier
     skip_final_snapshot = true  #delete the snapshot when the db is deleted keeping it freeeeeeee    
