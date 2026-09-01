@@ -23,7 +23,7 @@ STEP 1: setting up the environment (started at 31/8/26 10pm TO 12pm) 2 Hrs
    -setup console account credentials with mailsagarsharma33@gmail.com
    -JUST DISABLE AUTOPAY ONCE IMM DONE HERE AND CLOSE INSTANCES WHEN I STOP WORKING
    -I also setup a budget alert for cost per month if > 15$ , when the budget reacher 67% of the month an alert is sent
-   
+
   3:Setup terraform locally -----DONE-----
 
    -install amd64 zip 
@@ -36,6 +36,7 @@ STEP 1: setting up the environment (started at 31/8/26 10pm TO 12pm) 2 Hrs
  
 
 STEP 2 part 1: infra provisioning (started at 1/9/26 1pm)
+
   1: terraform file structure and code - VPC, RDS (PostgreSQL), and application hosting (EC2) on AWS
    - create IAM user for terraform 
    - create programmatic authentication keys
@@ -45,7 +46,8 @@ STEP 2 part 1: infra provisioning (started at 1/9/26 1pm)
    - terraform plan 
 
   2: state management
-   - s3 with dynamodb statelocking
+   - created s3 bucket for state locking
+   - wrote backend.tf with the bucket details
 
 STEP 3 part 2:Deployment Automation:
   1:Create CI/CD pipelines (GitHub Actions/GitLab/Jenkins) 
