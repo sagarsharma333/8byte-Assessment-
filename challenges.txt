@@ -15,5 +15,9 @@ mistakes and challenges
 
 5> used a "cidr_block" instead of "security_groups"
    fixed
-6> db would not connect to ec2 because my terraform securitygroup in therds resource was wrong (SPENT FOREVER IN THIS AUTOCORRECT IS GOOD AND BAD)    
+
+6> db would not connect to ec2 because my terraform securitygroup in the resource was wrong (SPENT FOREVER IN THIS AUTOCORRECT IS GOOD AND BAD)    
    fixed
+
+7> BIGGEST ISSUE SO FAR AND BY FAR DUMB : i have a "$" in my db pass and i inject it during runtime and so the db was not authenticating
+   fix - "" -> ' ' use secrets management pls :) 
