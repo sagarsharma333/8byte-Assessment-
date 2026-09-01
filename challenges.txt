@@ -15,3 +15,5 @@ mistakes and challenges
 
 5> used a "cidr_block" instead of "security_groups"
    fixed
+6> db would not connect to ec2 because my terraform securitygroup in therds resource was wrong (SPENT FOREVER IN THIS AUTOCORRECT IS GOOD AND BAD)    
+   fixed

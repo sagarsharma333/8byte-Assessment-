@@ -19,7 +19,7 @@ resource "aws_db_instance" "main" {
     password = var.db_password 
 
     db_subnet_group_name = aws_db_subnet_group.main.name
-    vpc_security_group_ids = [aws_security_group.app.id]
+    vpc_security_group_ids = [aws_security_group.rds.id]
 
     multi_az = false
     publicly_accessible = false
