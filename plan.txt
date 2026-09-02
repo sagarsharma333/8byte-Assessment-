@@ -10,7 +10,7 @@ Part 4: Documentation: Provide a README explaining setup, architectural decision
 Email was sent to me @ 3:51 PM on 31st August 2026
 need to be done @ 3:00 PM on 3rd September 2026
 
-STEP 1: setting up the environment (started at 31/8/26 10pm TO 12pm) 2 Hrs
+STEP 1: setting up the environment (started at 31/8/26 10pm TO 12pm) 5 Hrs
 
   1:github repository  -----DONE-----
    -updated git 
@@ -19,20 +19,17 @@ STEP 1: setting up the environment (started at 31/8/26 10pm TO 12pm) 2 Hrs
    -Branch Setup
 
   2:AWS account within "free tier". 100$ for 6 months  -----DONE-----
-
    -setup console account credentials with mailsagarsharma33@gmail.com
    -JUST DISABLE AUTOPAY ONCE IMM DONE HERE AND CLOSE INSTANCES WHEN I STOP WORKING
    -I also setup a budget alert for cost per month if > 15$ , when the budget reacher 67% of the month an alert is sent
 
   3:Setup terraform locally -----DONE-----
-
    -install amd64 zip 
    -setup environment variables : $PATH SET TO DIRECTORY NOT .exe  W:\wAPPLICATIONS\Terraform 1.16.0
    
-  4:setting up the local project -----DONE-----
-    -using ec2-user but good habit is to make another user and manage permissions
-
-    -Creating ec2 application environment
+  4:setting up the project -----DONE----- (4hrs)
+    -using ec2-user but good habit is to make another user and manage permissions #happy-paths
+    -Creating ec2 application environment  
                 dnf update -y
                 dnf install -y docker
                 systemctl enable docker
@@ -48,54 +45,84 @@ STEP 1: setting up the environment (started at 31/8/26 10pm TO 12pm) 2 Hrs
    - we store visited site count in postgresql
  
 
-STEP 2 part 1: infra provisioning (started at 1/9/26 1am stopped at 4am) 3hrs
+STEP 2 part 1: infra provisioning (started at 1/9/26 1am stopped at 4am) 5hrs
 
   1: terraform file structure and code - VPC, RDS (PostgreSQL), and application hosting (EC2) on AWS
    - create IAM user for terraform 
    - create programmatic authentication keys
    - make main.tf file
-   - configure aws cli with credentials
+   - configure aws cli for terraform credentials
    - terraform init (aws version v6.62.0 on local)
    - terraform plan 
-
+   - terraform apply
    ----------------------------------------.tf files-----------------------------------------------
-   backend.tf file created to manage statelocking in s3 bucket 
+   backend.tf file created to manage statelocking in s3 bucket (4 hrs)
     - s3 configured first
     - s3 key for locking defined
 
-   vpc.tf file created with 2 public and 2 private subnets for ec2 , alb and rds requirements
-   main.tf changes to providers.tf 
-   variables.tf for handling all variables in my main 
-   vpc.tf vpc configuration
-   rds.tf rds configuration
+   vpc.tf - file created with 2 public and 2 private subnets for ec2 , alb and rds requirements
+
+   main.tf changes to providers.tf - defined aws as my provider and tried setting a default label
+
+   variables.tf - for handling all variables in my main 
+   
+   rds.tf - defined rds related variables and set backup_retention to 1 for #free tier
+
    security_groups.tf security groups configuration for alb, app, and rds
-   alb.tf Load balancer configuration
-   .tfvars handling password injection during tf.apply from here with ip stuff
-   outputs.tf just to see some variables
 
-   ec2.tf ec2 configuration file
+   alb.tf -Configured Application Load balancer target groups and listners
 
+   .tfvars -handling password injection during tf.apply from here with ip stuff
 
+   outputs.tf - just to see some variables on terraform apply and terraform plan
 
+   ec2.tf - ec2 configured with latest ami as a t3.micro 
+   ------------------------------------------------------------------------------------------------
 
   2: state management ----------DONE------------
    - created s3 bucket for state locking
    - wrote backend.tf with the bucket details
 
-STEP 3 part 2:Deployment Automation:
+
+STEP 3 part 2:Deployment Automation: (4hrs)
+
+
   1:Create CI/CD pipelines (GitHub Actions/GitLab/Jenkins) 
+  DEVELOPMENT:
     -added secrets to git
     -created workflow for dev 
-    -tested workflow 
-     
-  2:including test suites, 
-  3:Docker image handling, 
-  4:staging/production deployment logic.
+    -tested CI/CD workflow ---ok---
+  TESTING:
+    -mkdir application-test in ec2
+    -pulled the test Branch
+    -add a dummy test test_app.py that will always send 200
+    -created yaml with "test block" and wrote "deploy block" to only work if test block succeeds
+  PRODUCTION:
+    -mkdir application-prod in ec2
+    -pulled prod Branch
+    -created an "environment" in git to allow me to review changes before deploying them in prod
+
+    
+  2:including test suites, -----KINDA DONE-----
+  3:Docker image handling, -----------NOT DOING RIGHT NOW-------------- 
+  4:staging/production deployment logic.-----DONE-----
+
 
 STEP 4 part 3:Monitoring & logging
   1:Setup cloudwatch
+    - install cloudwatch agent on ec2 instance
+    - Created IAM Policy and attached it to my ec2 instance #was doing it manually then realised i should probably use terraform
+
+
+
+
+
+
+
+
    - Infrastructure metrics (CPU, memory, disk)
    - Application metrics (request rate, error rate, latency)
+   - Centralized logs 
 
 
 
