@@ -1,0 +1,54 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [prod]
+
+jobs:
+    
+  test:
+    # test segment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          cd app
+          pip3 install -r application/requirements.txt
+
+      - name: Run tests
+        run: |
+          pytest application/ -v
+
+  deploy:
+    # deploy segment only if the test segment is successful
+    needs: test
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Deploy to production environment
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo --- Pulling latest code ---
+            cd /home/ec2-user/application/8byte-Assessment-/application
+            git pull origin prod
+
+            echo --- Removing old container ---
+            docker stop 8byte-app-prod || true
+            docker rm 8byte-app-prod || true
+
+            echo --- Build new image ---
+            docker build -t 8byte-app:prod .
+
+            echo --- Running new container ---
+            docker run -d --name 8byte-app-prod -p 8081:80 -e DB_HOST=${{ secrets.DB_HOST }} -e DB_NAME=appdb -e DB_USER=appadmin -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} 8byte-app:prod

@@ -14,3 +14,4 @@ output "app_server_public_ip" {
     description = "The public IP of the app EC2 instance"
     value = aws_instance.app.public_ip
     }
+    

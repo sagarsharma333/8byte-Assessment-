@@ -6,7 +6,7 @@ mistakes and challenges
    fix - changed project name to "eight" 
 
 3> didnt create ec2 becuase i left in the auto fill for a wrong ami name 
-   fixed - removed the -gp2 from the name
+   fixed - removed the "-gp2" from the name
 
 4> free tier eligibilty issues
    ec2 - t2.micro is not free but t3.micro is free 
@@ -15,5 +15,19 @@ mistakes and challenges
 
 5> used a "cidr_block" instead of "security_groups"
    fixed
-6> db would not connect to ec2 because my terraform securitygroup in therds resource was wrong (SPENT FOREVER IN THIS AUTOCORRECT IS GOOD AND BAD)    
+
+6> db would not connect to ec2 because my terraform securitygroup in the resource was configured wrong and pointed to .app instead of .rds (SPENT FOREVER IN THIS, AUTOCORRECT IS GOOD AND BAD)    
    fixed
+
+7> BIGGEST ISSUE SO FAR AND BY FAR DUMB : i have a "$" in my db pass and i inject it during runtime and so the db was not authenticating
+   fix - "db_password" -> 'db_password'          use secrets management pls :) 
+
+8> CI/CD
+- its 5am i just realised i cant use github actions because i will have to expose the instance to 0.0.0.0 
+   thought about using a runner but 1gb ram isnt going to cut it
+   fix - i am opening 22 to 0.0.0.0 
+         will close it once ci/cd works and then will open it for demo #happy paths i guess but not happy doing this in virginia 
+
+- THIS $ IN DB PASSWORD IS NOT HELPING ME AND I DONT KNOW WHY I AM SO STUBORN TO MAKING THIS WORK
+   fix - i am changing the db_password wihtout "$" should have done this before
+
