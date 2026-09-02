@@ -35,4 +35,6 @@ mistakes and challenges
 
 - Ran out of disk space while installing the cloudwatch agent in the ec2 instance
   fix: increasing ebs volume by 6gbs  # yes i know convinient but i cant find another solution right now
-  
+
+- While setting up logs this new aws image stores system and access logs through systemmd journal 
+  fix : installed rsyslogs and added /var/log/messages to config.json

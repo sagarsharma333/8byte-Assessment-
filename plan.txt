@@ -10,7 +10,7 @@ Part 4: Documentation: Provide a README explaining setup, architectural decision
 Email was sent to me @ 3:51 PM on 31st August 2026
 need to be done @ 3:00 PM on 3rd September 2026
 
-STEP 1: setting up the environment (started at 31/8/26 10pm TO 12pm) 5 Hrs
+STEP 1: setting up the environment (5 Hrs)
 
   1:github repository  -----DONE-----
    -updated git 
@@ -45,7 +45,7 @@ STEP 1: setting up the environment (started at 31/8/26 10pm TO 12pm) 5 Hrs
    - we store visited site count in postgresql
  
 
-STEP 2 part 1: infra provisioning (started at 1/9/26 1am stopped at 4am) 5hrs
+STEP 2 part 1: infra provisioning  (5hrs)
 
   1: terraform file structure and code - VPC, RDS (PostgreSQL), and application hosting (EC2) on AWS
    - create IAM user for terraform 
@@ -84,8 +84,7 @@ STEP 2 part 1: infra provisioning (started at 1/9/26 1am stopped at 4am) 5hrs
    - wrote backend.tf with the bucket details
 
 
-STEP 3 part 2:Deployment Automation: (4hrs)
-
+STEP 3 part 2: Deployment Automation: (4hrs)
 
   1:Create CI/CD pipelines (GitHub Actions/GitLab/Jenkins) 
   DEVELOPMENT:
@@ -108,22 +107,20 @@ STEP 3 part 2:Deployment Automation: (4hrs)
   4:staging/production deployment logic.-----DONE-----
 
 
-STEP 4 part 3:Monitoring & logging
+STEP 4 part 3: Monitoring & logging  (4hrs)
   1:Setup cloudwatch
     - install cloudwatch agent on ec2 instance
     - Created IAM Policy and attached it to my ec2 instance #was doing it manually then realised i should probably use terraform so i did
     - Created config.json for CloudwatchAgent for memory and disk util metrics and logs
 
+  2: Infrastructure metrics (CPU, memory, disk) -----Done-----
+     configured config.json file for instance metrics
 
+  3: Application metrics (request rate, error rate, latency) -----nope-----
+     configured log stream by ading log paths and defining it in config.json
 
-
-
-
-
-
-   - Infrastructure metrics (CPU, memory, disk) -----Done-----
-   - Application metrics (request rate, error rate, latency)
-   - Centralized logs 
+  4: systemlogs -----Done-----
+     installed rsyslogs for system logs and defined the same in config.json 
 
 
 
