@@ -1,5 +1,5 @@
-================================================================================
-                    8BYTE.AI DEVOPS ASSESSMENT
+
+8BYTE.AI DEVOPS ASSESSMENT
 ================================================================================
 
 PROJECT OVERVIEW
@@ -23,39 +23,38 @@ refer to them as well for understanding what i went through while building.
 The assignment requirements and what i have acheived:
 
 1. Infrastructure Provisioning - Terraform-based AWS infrastructure -------DONE
-   -VPC with public and private subnets
-   -EC2 instances or ECS/EKS for application hosting 
-   -RDS for PostgreSQL database
-   -Security groups with appropriate rules 
-   -Load balancer for the frontend 
-   -Include variables.tf for configurable parameters 
-   -Implement proper state management 
-   -Add outputs for key resources
+- VPC with public and private subnets
+- EC2 instances or ECS/EKS for application hosting 
+- RDS for PostgreSQL database
+- Security groups with appropriate rules 
+- Load balancer for the frontend 
+- Include variables.tf for configurable parameters 
+- Implement proper state management 
+- Add outputs for key resources
 
 2. Deployment Automation - CI/CD pipelines with GitHub Actions
-   -Run tests on PR creation ---------------------------------------------DONE
-   -Build and push Docker images to a registry on merge to main-----------NOT DONE 
-   -Deploy to staging environment ----------------------------------------DONE
-   -Include a manual approval step for production deployment--------------DONE 
-   -Run unit and integration tests ---------------------------------------NOT DONE
-   -Scan for vulnerabilities in dependencies and containers---------------NOT DONE 
-   -Notify on failures (Slack/email)--------------------------------------DEFAULT DONE
+- Run tests on PR creation ---------------------------------------------DONE
+- Build and push Docker images to a registry on merge to main-----------NOT DONE 
+- Deploy to staging environment ----------------------------------------DONE
+- Include a manual approval step for production deployment--------------DONE 
+- Run unit and integration tests ---------------------------------------NOT DONE
+- Scan for vulnerabilities in dependencies and containers---------------NOT DONE 
+- Notify on failures (Slack/email)--------------------------------------DEFAULT DONE
 
 3. Monitoring & Logging - CloudWatch monitoring and centralized logging
-   -Infrastructure metrics (CPU, memory, disk)----------------------------DONE 
-   -Application metrics (request rate, error rate, latency)---------------NOT DONE 
-   -Database metrics -----------------------------------------------------DONE
-   -Application logs -----------------------------------------------------DONE
-   -System logs ----------------------------------------------------------DONE
-   -Access logs ----------------------------------------------------------DONE
-   -Create at least two meaningful dashboards ----------------------------1 DONE
+- Infrastructure metrics (CPU, memory, disk)----------------------------DONE 
+- Application metrics (request rate, error rate, latency)---------------NOT DONE 
+- Database metrics -----------------------------------------------------DONE
+- Application logs -----------------------------------------------------DONE
+- System logs ----------------------------------------------------------DONE
+- Access logs ----------------------------------------------------------DONE
+- Create at least two meaningful dashboards ----------------------------1 DONE
 
 4. Documentation - Comprehensive setup and architecture documentation
-   -Secret management ----------------------------------------------------NOT REALLY
-   -Backup strategy ------------------------------------------------------KIND OFF
+- Secret management ----------------------------------------------------NOT REALLY
+- Backup strategy ------------------------------------------------------KIND OFF
 
 
-================================================================================
 PART 1: INFRASTRUCTURE PROVISIONING
 ================================================================================
 
@@ -98,7 +97,6 @@ SECURITY GROUPS CONFIGURATION
 - RDS Security Group: Allows PostgreSQL traffic only from the Application SG
 
 
-================================================================================
 PART 2: DEPLOYMENT AUTOMATION
 ================================================================================
 
@@ -111,10 +109,9 @@ Three-tier pipeline with environment-specific deployments:
 
 BRANCH STRATEGY
 --------------------------------------------------------------------------------
-Branch          Environment     Trigger                 Approval Required
-dev             8BYTE EC2         Push                    No
-test            8BYTE EC2         PR/push                      No (after tests pass)
-main            8BYTE EC2         PR/merge                Yes
+- dev push directly from all developers run deploy
+- test merge from dev and run a test before deploy
+- prod merge from test and run a test before deply, also needs approval
 
 GITHUB ACTIONS WORKFLOWS
 --------------------------------------------------------------------------------
@@ -140,7 +137,6 @@ on test and prod. dummy test loop checked
 5. Running the container with proper secrets.variables
 
 
-================================================================================
 PART 3: MONITORING & LOGGING
 ================================================================================
 
@@ -170,7 +166,7 @@ Logs collected from three sources:
 
 All logs are pushed to CloudWatch Logs with 1-day retention policy.
 
-================================================================================
+
 SECURITY CONSIDERATIONS
 ================================================================================
 
@@ -206,7 +202,7 @@ DATA PROTECTION
 - TLS/SSL with SSH Tunneling for database connections
 - 1-day automated backup retention (optimized for free tier)
 
-================================================================================
+
 COST OPTIMIZATION MEASURES
 ================================================================================
 
@@ -228,53 +224,53 @@ RESOURCE MANAGEMENT
 - Development environment can be stopped when not in use
 - Regular review of unused resources
 
-================================================================================
+
 CHALLENGES FACED & SOLUTIONS
 ================================================================================
 
 1. Git and .terraform Files
-   Challenge: Pushed .terraform folder to git causing push failures
-   Solution: Added .terraform to .gitignore
+- Challenge: Pushed .terraform folder to git causing push failures
+- Solution: Added .terraform to .gitignore
 
 2. RDS Naming Constraints
-   Challenge: RDS name couldn't start with numeric "8"
-   Solution: Changed project name to "eight"
+- Challenge: RDS name couldn't start with numeric "8"
+- solution: Changed project name to "eight"
 
 3. AMI Configuration Error
-   Challenge: Wrong AMI name used in EC2 configuration
-   Solution: Removed "-gp2" suffix from AMI name
+- Challenge: Wrong AMI name used in EC2 configuration
+- Solution: Removed "-gp2" suffix from AMI name
 
 4. Free Tier Eligibility Issues
-   Challenge: t2.micro not free tier eligible, RDS 7-day backup too costly
-   Solution: Changed to t3.micro and set backup_retention to 1 day
+- Challenge: t2.micro not free tier eligible, RDS 7-day backup too costly
+- Solution: Changed to t3.micro and set backup_retention to 1 day
 
 5. Security Group Configuration
-   Challenge: Used cidr_block instead of security_groups in RDS config
-   Solution: Corrected to reference security group IDs
+- Challenge: Used cidr_block instead of security_groups in RDS config
+- Solution: Corrected to reference security group IDs
 
 6. Database Connection Issues
-   Challenge: Security group misconfiguration causing connection failures
-   Solution: Updated resource references to correct security groups
+- Challenge: Security group misconfiguration causing connection failures
+- Solution: Updated resource references to correct security groups
    (spent significant time debugging)
 
 7. Special Characters in Database Password
-   Challenge: $ character in DB password causing authentication failures
-   Solution: Removed special characters, implemented proper string handling
+- Challenge: $ character in DB password causing authentication failures
+- Solution: Removed special characters, implemented proper string handling
 
 8. CI/CD Security Concerns
-   Challenge: Opening SSH to 0.0.0.0 for GitHub Actions
-   Solution: Temporary opening with planned closure, exploring self-hosted runners
+- Challenge: Opening SSH to 0.0.0.0 for GitHub Actions
+- Solution: Temporary opening with planned closure, exploring self-hosted runners
 
 9. CloudWatch Agent Storage
-   Challenge: Insufficient disk space for CloudWatch agent installation
-   Solution: Increased EBS volume by 6GB
+- Challenge: Insufficient disk space for CloudWatch agent installation
+- Solution: Increased EBS volume by 6GB
 
 10. Log Collection on New AWS Image
-    Challenge: New AWS images use systemd journal instead of traditional syslog
-    Solution: Installed rsyslog and configured /var/log/messages for CloudWatch
+- Challenge: New AWS images use systemd journal instead of traditional syslog
+- Solution: Installed rsyslog and configured /var/log/messages for CloudWatch
 
 
-================================================================================
+
 BEST PRACTICES CONSIDERATIONS
 ================================================================================
 
@@ -293,33 +289,31 @@ BEST PRACTICES CONSIDERATIONS
 13.Use Roll-back strategy for ci/cd i didnt
 14.Configure ec2 more deeply in terraform with default apps needed.
 
-================================================================================
+
 HOW TO RUN THE PROJECT
 ================================================================================
 
 1. Clone the Repository
-   Clone the repository to your local machine
+- Clone the repository to your local machine
 
 2. Infrastructure Setup
-   Navigate to the terraform directory, initialize, and apply the 
-   infrastructure configuration
+- Navigate to the terraform directory, initialize, and apply the infrastructure configuration
 
 3. Application Deployment
-   Deploy via console then use GitHub Actions (automatic on push)
+- Deploy via console then use GitHub Actions (automatic on push)
 
 4. Monitoring Setup
-   CloudWatch agent is installed automatically via EC2 user data; access 
-   dashboards through AWS Console
+- CloudWatch agent is installed automatically via EC2 user data; access 
+- dashboards through AWS Console
 
 
-================================================================================
 ASSESSMENT TIMELINE
 ================================================================================
 
-Start Date:     August 31, 2026
-End Date:       September 3, 2026
-Status:         Complete "relatively"
-Hours:          16
-Credits used:   5$ 
+- Start Date:August 31, 2026
+- End Date:September 3, 2026
+- Status:Complete "relatively"
+- Hours:16
+- Credits used:5$ 
 
 ================================================================================
