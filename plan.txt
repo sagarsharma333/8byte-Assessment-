@@ -111,7 +111,8 @@ STEP 3 part 2:Deployment Automation: (4hrs)
 STEP 4 part 3:Monitoring & logging
   1:Setup cloudwatch
     - install cloudwatch agent on ec2 instance
-    - Created IAM Policy and attached it to my ec2 instance #was doing it manually then realised i should probably use terraform
+    - Created IAM Policy and attached it to my ec2 instance #was doing it manually then realised i should probably use terraform so i did
+    - Created config.json for CloudwatchAgent for memory and disk util metrics and logs
 
 
 
@@ -120,7 +121,7 @@ STEP 4 part 3:Monitoring & logging
 
 
 
-   - Infrastructure metrics (CPU, memory, disk)
+   - Infrastructure metrics (CPU, memory, disk) -----Done-----
    - Application metrics (request rate, error rate, latency)
    - Centralized logs 
 
