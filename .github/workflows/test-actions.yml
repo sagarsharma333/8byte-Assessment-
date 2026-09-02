@@ -1,0 +1,52 @@
+name: Test and Deploy to Test Env
+
+on:
+  push:
+    branches: [test]
+
+jobs:
+  test:
+    # test segment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          cd app
+          pip3 install -r application/requirements.txt
+
+      - name: Run tests
+        run: |
+          pytest application/ -v
+    
+  deploy:
+    # deploy segment only if the test segment is successful
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to test environment
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo --- Pulling latest code ---
+            cd /home/ec2-user/application/8byte-Assessment-/application
+            git pull origin test
+
+            echo --- Removing old container ---
+            docker stop 8byte-app-test || true
+            docker rm 8byte-app-test || true
+
+            echo --- Build new image ---
+            docker build -t 8byte-app:test .
+
+            echo --- Running new container ---
+            docker run -d --name 8byte-app-test -p 8080:80 -e DB_HOST=${{ secrets.DB_HOST }} -e DB_NAME=appdb -e DB_USER=appadmin -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} 8byte-app:test
