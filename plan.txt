@@ -29,7 +29,7 @@ STEP 1: setting up the environment (started at 31/8/26 10pm TO 12pm) 2 Hrs
    -install amd64 zip 
    -setup environment variables : $PATH SET TO DIRECTORY NOT .exe  W:\wAPPLICATIONS\Terraform 1.16.0
    
-  4:setting up the local project -----skipping-----
+  4:setting up the local project -----DONE-----
     -using ec2-user but good habit is to make another user and manage permissions
 
     -Creating ec2 application environment
@@ -37,9 +37,12 @@ STEP 1: setting up the environment (started at 31/8/26 10pm TO 12pm) 2 Hrs
                 dnf install -y docker
                 systemctl enable docker
                 systemctl start docker
-                usermod -aG docker ec2-user                         ---done---
+                usermod -aG docker ec2-user                         ---done--- # dont do this give docker the permissions it needs
                 sudo dnf install -y git                             ---done---
                 git clone 8byte-Assessment-
+    - Docker
+                docker build -t 8byte-app .
+                docker run "i have my own command for injecting db_password"
 
    - simple python project that will show visited count
    - we store visited site count in postgresql
@@ -57,6 +60,9 @@ STEP 2 part 1: infra provisioning (started at 1/9/26 1am stopped at 4am) 3hrs
 
    ----------------------------------------.tf files-----------------------------------------------
    backend.tf file created to manage statelocking in s3 bucket 
+    - s3 configured first
+    - s3 key for locking defined
+
    vpc.tf file created with 2 public and 2 private subnets for ec2 , alb and rds requirements
    main.tf changes to providers.tf 
    variables.tf for handling all variables in my main 
@@ -78,9 +84,13 @@ STEP 2 part 1: infra provisioning (started at 1/9/26 1am stopped at 4am) 3hrs
 
 STEP 3 part 2:Deployment Automation:
   1:Create CI/CD pipelines (GitHub Actions/GitLab/Jenkins) 
-   -including test suites, 
-   -Docker image handling, 
-   -staging/production deployment logic.
+    -added secrets to git
+    -created workflow for dev 
+    -tested workflow 
+     
+  2:including test suites, 
+  3:Docker image handling, 
+  4:staging/production deployment logic.
 
 STEP 4 part 3:Monitoring & logging
   1:Setup cloudwatch

@@ -26,4 +26,4 @@ resource "aws_db_instance" "main" {
 
     backup_retention_period = 1 #this is a simple backup retention for disaster management increase this value for real use cases #free tier
     skip_final_snapshot = true  #delete the snapshot when the db is deleted keeping it freeeeeeee    
-}
+} 

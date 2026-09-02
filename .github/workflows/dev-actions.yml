@@ -1,0 +1,31 @@
+# .github/workflows/deploy-dev.yml
+name: Deploy to Dev
+
+on:
+  push:
+    branches: [dev]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH and deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+           echo --- Pulling latest code ---
+           cd /home/ec2-user/application/8byte-Assessment-/application
+           git pull origin dev
+
+           echo --- Removing old container ---
+           docker stop 8byte-app-dev || true
+           docker rm 8byte-app-dev || true
+
+           echo --- Build new image ---
+           docker build -t 8byte-app:dev .
+
+           echo --- Running new container ---
+           docker run -d --name 8byte-app-dev -p 80:80 -e DB_HOST=${{ secrets.DB_HOST }} -e DB_NAME=appdb -e DB_USER=appadmin -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} 8byte-app:dev
