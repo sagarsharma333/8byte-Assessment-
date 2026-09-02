@@ -16,14 +16,16 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/ec2-user/application/8byte-Assessment-/application
-            git pull origin dev
-            docker stop 8byte-app-dev || true
-            docker rm 8byte-app-dev || true
-            docker build -t 8byte-app:dev .
-            docker run -d --name 8byte-app-dev -p 80:80 \
-              -e DB_HOST=${{ secrets.DB_HOST }} \
-              -e DB_NAME=appdb \
-              -e DB_USER=appadmin \
-              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \ 
-              8byte-app:dev
+           echo --- Pulling latest code ---
+           cd /home/ec2-user/application/8byte-Assessment-/application
+           git pull origin dev
+
+           echo --- Removing old container ---
+           docker stop 8byte-app-dev || true
+           docker rm 8byte-app-dev || true
+
+           echo --- Build new image ---
+           docker build -t 8byte-app:dev .
+
+           echo --- Running new container ---
+           docker run -d --name 8byte-app-dev -p 80:80 -e DB_HOST=${{ secrets.DB_HOST }} -e DB_NAME=appdb -e DB_USER=appadmin -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} 8byte-app:dev

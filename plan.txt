@@ -84,9 +84,13 @@ STEP 2 part 1: infra provisioning (started at 1/9/26 1am stopped at 4am) 3hrs
 
 STEP 3 part 2:Deployment Automation:
   1:Create CI/CD pipelines (GitHub Actions/GitLab/Jenkins) 
-   -including test suites, 
-   -Docker image handling, 
-   -staging/production deployment logic.
+    -added secrets to git
+    -created workflow for dev 
+    -tested workflow 
+     
+  2:including test suites, 
+  3:Docker image handling, 
+  4:staging/production deployment logic.
 
 STEP 4 part 3:Monitoring & logging
   1:Setup cloudwatch
