@@ -19,6 +19,8 @@ However i wanted to have something for all points and hence kept in mind the tim
 I used plan.txt while building this project and challenges.txt for challenges please do 
 refer to them as well for understanding what i went through while building.
 
+read this readme.md file in a text editor
+
 
 The assignment requirements and what i have acheived:
 
