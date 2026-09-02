@@ -18,7 +18,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd app
+          cd application
           pip3 install -r application/requirements.txt
 
       - name: Run tests
@@ -38,7 +38,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             echo --- Pulling latest code ---
-            cd /home/ec2-user/application/8byte-Assessment-/application
+            cd /home/ec2-user/application-test/8byte-Assessment-/application
             git pull origin test
 
             echo --- Removing old container ---
