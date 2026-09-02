@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd application
-          pip3 install -r application/requirements.txt
+          pip3 install -r requirements.txt
 
       - name: Run tests
         run: |
