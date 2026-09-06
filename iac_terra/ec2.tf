@@ -7,10 +7,10 @@ data "aws_ami" "amazon_linux" {
         values = ["al2023-ami-*-x86_64"]
     }
   
-}
+} # this would have replaced my whole instance because of most_recent = true 
 
 resource "aws_instance" "app" {
-    ami = data.aws_ami.amazon_linux.id
+    ami = "ami-0ea4bced14b68e0bb" # hard coded for the new image changes
     instance_type = "t3.micro" #how can t3.micro be free but not t2.micro? I don't know 
     key_name = var.key_name
 
@@ -20,6 +20,10 @@ resource "aws_instance" "app" {
     vpc_security_group_ids = [aws_security_group.app.id]
     associate_public_ip_address = true
 
+    lifecycle {
+        ignore_changes = [ami]
+    }
+
     root_block_device {
         volume_size = 8
         volume_type = "gp3"
@@ -27,6 +31,7 @@ resource "aws_instance" "app" {
 
 tags = {
         Name = "${var.project_name}-app"
+        environment = "dev,prod&stg"  #added for DLM
     }
 
 }

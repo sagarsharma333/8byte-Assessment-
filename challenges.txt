@@ -38,3 +38,10 @@ mistakes and challenges
 
 - While setting up logs this new aws image stores system and access logs through systemmd journal 
   fix : installed rsyslogs and added /var/log/messages to config.json
+
+10>POST SUBMISSION challenges
+
+-new amazon image was available and so terraform was going to destroy my old instance with all my app configs 
+ fix : hard coded the ami into the ec2.tf code and also made an ignore for lifecycle management
+ better solution: include app related shell commands during create. or ignore in latest_ami in lifecycle management
+ -this is also where ansible comes in i suppose.
