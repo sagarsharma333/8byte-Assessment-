@@ -53,6 +53,7 @@ resource "aws_dlm_lifecycle_policy" "ami_snapshot_policy" {
     state = "ENABLED"
     policy_details {
         resource_types = ["INSTANCE"]
+        policy_type = "IMAGE_MANAGEMENT"
         #targetting a tag instead of a specific instance id fo reusability 
         target_tags = {
             "Environment" = "dev,prod&stg"

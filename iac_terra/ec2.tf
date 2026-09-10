@@ -10,7 +10,7 @@ data "aws_ami" "amazon_linux" {
 } # this would have replaced my whole instance because of most_recent = true 
 
 resource "aws_instance" "app" {
-    ami = "ami-0ea4bced14b68e0bb" # hard coded for the new image changes
+    ami = "ami-0ea4bced14b68e0bb" # hard coded so that it doesnt pull a new Ami
     instance_type = "t3.micro" #how can t3.micro be free but not t2.micro? I don't know 
     key_name = var.key_name
 

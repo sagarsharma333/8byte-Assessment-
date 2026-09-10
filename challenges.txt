@@ -45,3 +45,4 @@ mistakes and challenges
  fix : hard coded the ami into the ec2.tf code and also made an ignore for lifecycle management
  better solution: include app related shell commands during create. or ignore in latest_ami in lifecycle management
  -this is also where ansible comes in i suppose.
+ -Infrastructure should be immutable
