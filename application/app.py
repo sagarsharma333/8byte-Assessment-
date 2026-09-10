@@ -66,7 +66,7 @@ def index():
       </head>
       <body>
         <div class="card">
-          <h1>Hello from 8Byte DevOps Assignment 👋  ({APP_ENV.upper()})</h1>
+          <h1>Hello from 8Byte DevOps Assignment 👋  ({APP_ENV})</h1>
           <p>Database status: <span class="status">{db_status}</span></p>
           <p>Page visits (from Postgres): <strong>{count}</strong></p>
         </div>
