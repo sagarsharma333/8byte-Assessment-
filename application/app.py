@@ -4,6 +4,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
+APP_ENV = os.environ.get("APP_ENV", "dev")
 DB_HOST = os.environ.get("DB_HOST")
 DB_NAME = os.environ.get("DB_NAME", "appdb")
 DB_USER = os.environ.get("DB_USER", "appadmin")
@@ -51,7 +52,7 @@ def index():
     return f"""
     <html>
       <head>
-        <title>8Byte DevOps Assignment DEVELOPMENT</title>
+        <title>8Byte DevOps Assignment</title>
         <style>
           body {{ font-family: sans-serif; background: #0f172a; color: #e2e8f0;
                   display: flex; align-items: center; justify-content: center;
@@ -65,7 +66,7 @@ def index():
       </head>
       <body>
         <div class="card">
-          <h1>Hello from 8Byte DevOps Assignment 👋</h1>
+          <h1>Hello from 8Byte DevOps Assignment 👋  ({APP_ENV})</h1>
           <p>Database status: <span class="status">{db_status}</span></p>
           <p>Page visits (from Postgres): <strong>{count}</strong></p>
         </div>
