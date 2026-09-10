@@ -52,7 +52,7 @@ def index():
     return f"""
     <html>
       <head>
-        <title>8Byte DevOps Assignment ({APP_ENV.upper()})</title>
+        <title>8Byte DevOps Assignment</title>
         <style>
           body {{ font-family: sans-serif; background: #0f172a; color: #e2e8f0;
                   display: flex; align-items: center; justify-content: center;
@@ -66,7 +66,7 @@ def index():
       </head>
       <body>
         <div class="card">
-          <h1>Hello from 8Byte DevOps Assignment 👋</h1>
+          <h1>Hello from 8Byte DevOps Assignment 👋  ({APP_ENV.upper()})</h1>
           <p>Database status: <span class="status">{db_status}</span></p>
           <p>Page visits (from Postgres): <strong>{count}</strong></p>
         </div>
