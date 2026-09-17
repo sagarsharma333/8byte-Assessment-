@@ -49,4 +49,4 @@ jobs:
             docker build -t 8byte-app:test .
 
             echo --- Running new container ---
-            docker run -d --name 8byte-app-test -p 8080:80 -e DB_HOST=${{ secrets.DB_HOST }} -e DB_NAME=appdb -e DB_USER=appadmin -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} 8byte-app:test
+            docker run -d --name 8byte-app-test -p 8080:80 -e APP_ENV=testing -e DB_HOST=${{ secrets.DB_HOST }} -e DB_NAME=appdb -e DB_USER=appadmin -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} 8byte-app:test

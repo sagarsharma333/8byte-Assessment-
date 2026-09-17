@@ -47,6 +47,20 @@ resource "aws_security_group" "app" {
         protocol = "tcp"
         cidr_blocks = [var.my_ip]
     }
+    ingress {
+        description = "Test (direct access)"
+        from_port = 8080
+        to_port = 8080
+        protocol = "tcp"
+        cidr_blocks = [var.my_ip]
+    }
+    ingress {
+        description = "Prod (direct access)"
+        from_port = 8081
+        to_port = 8081
+        protocol = "tcp"
+        cidr_blocks = [var.my_ip]
+    }
     egress {
         from_port = 0
         to_port = 0
@@ -67,13 +81,7 @@ resource "aws_security_group" "rds" {
         protocol = "tcp"
         security_groups = [aws_security_group.app.id]
     }
-    ingress {
-        description = "Postgres from my IP"
-        from_port = 5432
-        to_port = 5432
-        protocol = "tcp"
-        cidr_blocks = [var.my_ip]
-    }
+    
     
     egress {
         from_port = 0
